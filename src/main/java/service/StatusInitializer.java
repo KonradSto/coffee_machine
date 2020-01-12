@@ -2,6 +2,7 @@ package service;
 
 import model.Status;
 
-public class StatusInitializer {
+public interface StatusInitializer {
 
+    public Status initializeCoffeeMachineStatus();
 }

@@ -14,6 +14,9 @@ public class Status {
         this.cocoaAmount = cocoaAmount;
     }
 
+    public Status() {
+    }
+
     public int getCoffeeAmount() {
         return coffeeAmount;
     }
