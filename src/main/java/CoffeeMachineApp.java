@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import model.CoffeeMachine;
-import model.Status;
+import service.BeverageMakerImp;
+import service.FileReader;
 import service.FileReaderImp;
 import service.RecipeParser;
 
@@ -11,31 +10,24 @@ public class CoffeeMachineApp {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(new Status());
-        coffeeMachine.showGreeting();
+        FileReader fileReader = new FileReaderImp();
+        RecipeParser recipeParser = new RecipeParser();
+        CoffeeMachine coffeeMachine = new CoffeeMachine(new BeverageMakerImp(fileReader, recipeParser));
+        coffeeMachine.run();
 
-/*        while (scanner.hasNextLine()) {
-            if (scanner.nextLine().equalsIgnoreCase("status")) {
+        while (scanner.hasNextLine()) {
+            String userInput = scanner.nextLine();
+            if (userInput.equalsIgnoreCase("status")) {
                 coffeeMachine.showStatus();
-            }else if (scanner.nextLine().equalsIgnoreCase("exit")) {
+            }else if (userInput.equalsIgnoreCase("exit")) {
                 coffeeMachine.exit();
+            } else if (userInput.toLowerCase().contains("make")) {
+                coffeeMachine.makeCoffee(userInput.replaceAll("make", ""));
+            } else {
+                System.out.println("Command not recognized, try again!");
             }
         }
         scanner.close();
-        coffeeMachine.exit();*/
-
-        FileReaderImp fileReaderImp = new FileReaderImp();
-        RecipeParser recipeParser = new RecipeParser();
-        List<String> recipe = fileReaderImp.readRecipeLinesToList("D:\\Dev\\coffee-machine\\src\\main\\resources\\BlackCoffeeRecipe.txt");
-        List<String> step;
-        for (String line : recipe) {
-            step = recipeParser.parseRecipeLine(line);
-            System.out.println(step.get(1));
-            try {
-                Thread.sleep(Integer.parseInt(step.get(3))*1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        coffeeMachine.exit();
     }
 }

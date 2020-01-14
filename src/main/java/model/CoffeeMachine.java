@@ -8,17 +8,18 @@ public class CoffeeMachine {
     private Status status;
     private BeverageMaker beverageMaker;
 
-    public CoffeeMachine(Status status) {
+    public CoffeeMachine(BeverageMaker beverageMaker) {
         StatusInitializerImp statusInitializerImp = new StatusInitializerImp();
         this.status = statusInitializerImp.initializeCoffeeMachineStatus();
+        this.beverageMaker = beverageMaker;
     }
 
-    public void showGreeting(){
-        System.out.println("Hello!");
+    public void run(){
+        System.out.println("HELLO!");
     }
 
     public void exit(){
-        System.out.println("Bye!");
+        System.out.println("BYE!");
     }
 
     public void showStatus(){
@@ -28,8 +29,8 @@ public class CoffeeMachine {
         System.out.println("Cocoa: " + (int)((double)status.getCocoaAmount()/5) +"%");
     }
 
-    public void makecoffee(){
-
+    public void makeCoffee(String inquiredBeverage){
+        beverageMaker.makeCoffee(inquiredBeverage, status);
     }
 
 }

@@ -1,4 +1,8 @@
 package service;
 
-public class BeverageMaker {
+import model.Status;
+
+public interface BeverageMaker {
+
+    void makeCoffee(String beverage, Status currentStatus);
 }
