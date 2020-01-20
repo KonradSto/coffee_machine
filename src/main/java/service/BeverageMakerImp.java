@@ -16,7 +16,7 @@ public class BeverageMakerImp implements BeverageMaker {
 
     @Override
     public void makeCoffee(String beverage, Status currentStatus) {
-        List<String> recipe = fileReaderImp.readRecipeLinesToList("D:\\Dev\\coffee-machine\\src\\main\\resources\\" + beverage.replaceAll("\\s","")+ ".txt");
+        List<String> recipe = fileReaderImp.readRecipeLinesToList("src\\main\\resources\\" + beverage.replaceAll("\\s","")+ ".txt");
         List<String> step;
         if (recipe != null) {
             for (String line : recipe) {
